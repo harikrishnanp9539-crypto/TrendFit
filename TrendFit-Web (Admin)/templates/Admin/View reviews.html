@@ -1,0 +1,38 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_review_POST/#ab">
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th>From date</th>
+      <td>
+      <input type="date" name="datefield1" id="textfield" class="form-control" required/></td>
+      <th>To date</th>
+      <td>
+      <input type="date" name="datefield2" id="textfield2" class="form-control" required/></td>
+      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-success"/></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>Sl no</th>
+      <th>Date</th>
+      <th>Review</th>
+      <th>Rating</th>
+      <th>Username</th>
+    </tr>
+      {% for i in data %}
+
+    <tr>
+      <td>{{ forloop.counter }}&nbsp;</td>
+      <td>{{ i.date }}&nbsp;</td>
+      <td>{{ i.review }}&nbsp;</td>
+      <td>{{ i.rating}}&nbsp;</td>
+      <td>{{ i.USER.username}}&nbsp;</td>
+    </tr>
+        {% endfor %}
+
+  </table>
+</form>
+{% endblock %}

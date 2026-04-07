@@ -1,0 +1,97 @@
+{#{% extends 'Shop/shopindex.html' %}#}
+{#{% block body %}#}
+{#<form id="form1" name="form1" method="post" action="/myapp/view_payment_method_post/#ab">#}
+{#{% csrf_token %}#}
+{#  <table class="pull-left">#}
+{#    <tr>#}
+{#      <td>From date</td>#}
+{#      <td>#}
+{#      <input type="date" name="datefield1" id="textfield" class="form-control"/></td>#}
+{#      <td>To date</td>#}
+{#      <td>#}
+{#      <input type="date" name="datefield2" id="textfield2"class="form-control" /></td>#}
+{#      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-success" /></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#  <table class="table table-bordered " ">#}
+{#    <tr>#}
+{#      <th>SL NO</th>#}
+{#      <th>Date</th>#}
+{#      <th>User</th>#}
+{#        <th>Amount</th>#}
+{#        <th>Status</th>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>&nbsp;{{ forloop.counter }}</td>#}
+{#      <td>{{ i.ORDERMAIN.date }}</td>#}
+{#      <td>&nbsp;{{ i.USER.username }}</td>#}
+{#      <td>{{ i.amount }}</td>#}
+{#        <td>{{ i.status }}</td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#  </table>#}
+{#  <p>&nbsp;</p>#}
+{#</form>#}
+{#{% endblock %}#}
+
+{% extends "admin/newindex.html"  %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_payment_method_post/#ab" onsubmit="return validateForm()">
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td>From date</td>
+      <td>
+        <input type="date" name="datefield1" id="datefield1" class="form-control" required />
+      </td>
+      <td>To date</td>
+      <td>
+        <input type="date" name="datefield2" id="datefield2" class="form-control" required />
+      </td>
+      <td>
+        <input type="submit" name="button" id="button" value="Search" class="btn btn-success" />
+      </td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>SL NO</th>
+      <th>Date</th>
+      <th>User</th>
+      <th>Amount</th>
+      <th>Status</th>
+    </tr>
+    {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.ORDERMAIN.date }}</td>
+      <td>{{ i.USER.username }}</td>
+      <td>{{ i.amount }}</td>
+      <td>{{ i.status }}</td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+
+<script>
+  function validateForm() {
+    var fromDate = document.getElementById("datefield1").value;
+    var toDate = document.getElementById("datefield2").value;
+
+    if (!fromDate || !toDate) {
+      alert("Both dates must be selected.");
+      return false;
+    }
+
+    if (fromDate > toDate) {
+      alert("From Date cannot be later than To Date.");
+      return false;
+    }
+
+    return true;
+  }
+</script>
+{% endblock %}
+

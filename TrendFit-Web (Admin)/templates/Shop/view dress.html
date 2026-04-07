@@ -1,0 +1,83 @@
+{#{% extends 'Shop/shopindex.html' %}#}
+{#{% block body %}#}
+{#<form id="form1" name="form1" method="post" action="/myapp/view_dress_post/#ab">#}
+{#{% csrf_token %}#}
+{#  <table class="pull-left ">#}
+{#    <tr>#}
+{#      <td>#}
+{#      <input type="text" name="textfield" id="textfield" class="form-control" /></td>#}
+{#      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-success"/></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#  <table class="table table-bordered" >#}
+{#    <tr>#}
+{#      <th>Sl no</th>#}
+{#      <th>Dress name</th>#}
+{#      <th></th>#}
+{#      <th>Type</th>#}
+{#      <th>Photo1</th>#}
+{#      <th>Price</th>#}
+{#        <th></th>#}
+{#        <th></th>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>{{ forloop.counter }}</td>#}
+{#      <td>{{ i.name }}</td>#}
+{#      <td>{{ i.size }}</td>#}
+{#      <td>&nbsp;{{ i.type }}</td>#}
+{#      <td><img src="{{ i.photo }}" height="50px" width="50px"/></td>#}
+{#      <td>&nbsp;{{ i.price }}</td>#}
+{#    <td><a href="/myapp/edit_dress/{{ i.id }}#ab "class="btn btn-info">Edit</a> </td>#}
+{#    <td><a href="/myapp/deleted_dress/{{ i.id }}#ab" class="btn btn-danger">Delete</a> </td>#}
+{#    </tr>{% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#{% endblock %}#}
+{% extends "admin/newindex.html"  %}
+{% block body %}
+<script>
+function validateForm() {
+    var searchField = document.getElementById("textfield").value.trim();
+    if (searchField === "") {
+        alert("Please enter a search query.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<form id="form1" name="form1" method="post" action="/myapp/view_dress_post/#ab" onsubmit="return validateForm()">
+{% csrf_token %}
+  <table class="pull-left ">
+    <tr>
+      <td>
+      <input type="text" name="textfield" id="textfield" class="form-control" /></td>
+      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-success"/></td>
+    </tr>
+  </table>
+  <table class="table table-bordered" >
+    <tr>
+      <th>Sl no</th>
+      <th>Dress name</th>
+      <th>Size</th>
+      <th>Type</th>
+      <th>Photo1</th>
+      <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.name }}</td>
+      <td>{{ i.size }}</td>
+      <td>&nbsp;{{ i.type }}</td>
+      <td><img src="{{ i.photo }}" height="50px" width="50px"/></td>
+      <td>&nbsp;{{ i.price }}</td>
+    <td><a href="/myapp/edit_dress/{{ i.id }}#aa" class="btn btn-info">Edit</a> </td>
+    <td><a href="/myapp/deleted_dress/{{ i.id }}#ab" class="btn btn-danger">Delete</a> </td>
+    </tr>{% endfor %}
+  </table>
+</form>
+{% endblock %}

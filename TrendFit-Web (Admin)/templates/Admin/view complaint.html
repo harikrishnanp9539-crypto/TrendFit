@@ -1,0 +1,38 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_complaint_post/#ab">
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th>from date</th>
+      <th>
+      <input type="date" name="textfield" id="textfield" class="form-control" required/></th>
+      <th>To date</th>
+      <th>
+      <input type="date" name="textfield2" id="textfield2" class="form-control"  required/></th>
+      <th><input type="submit" name="button" id="button" value="Search"  class="btn btn-success"/></th>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>Sl no</th>
+      <th>Complaint date</th>
+      <th>Complaint</th>
+      <th>Sender info</th>
+      <th>Reply</th>
+      <th>Status</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.date }}</td>
+      <td>{{ i.complaint}}</td>
+      <td>{{ i.LOGIN.username }}</td>
+      <td>{% if i.status == "pending" %}<a href="/myapp/send_reply/{{ i.id }}#ab">Reply</a>{% else %}{{ i.reply }}{% endif %}</td>
+      <td>{{ i.status }}&nbsp;</td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

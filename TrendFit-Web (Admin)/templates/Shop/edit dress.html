@@ -1,0 +1,71 @@
+{% extends 'admin/newindex.html' %}
+{% block body %}
+
+<form id="form1" name="form1" method="post" action="/myapp/edit_dress_post/#ab">
+{% csrf_token %}
+<input type="hidden" value="{{ data.id }}" name="id">
+  <table class="table table-bordered">
+    <tr>
+      <th>Dress name</th>
+        <td>
+          <input type="text" name="textfield" id="textfield" value="{{ data.name }}" class="form-control"/></td>
+    </tr>
+    <tr>
+      <th>Size</th>
+      <td>
+      <input type="text" name="textfield2" id="textfield2" value="{{ data.size }}" class="form-control"/></td>
+    </tr>
+
+    <tr>
+      <th>gender</th>
+      <th><input type="radio"  {% if data.gender == "male" %} checked {% endif %} name="gender" id="radio" value="male" required/>
+          <label for="radio">Male </label><br>
+        <input type="radio" name="gender"  {% if data.gender == "female" %} checked {% endif %} id="radio" value="female"/>
+          <label for="radio">Female </label><br></th>
+    </tr>
+
+       <tr>
+      <th>Category</th>
+      <th>
+
+          <select name="category" required>
+              {% for i in data1 %}
+              <option {% if data.type == i.categoryname %} selected {% endif %} value="{{ i.categoryname }}">{{ i.categoryname}}</option>
+              {% endfor %}
+
+          </select>
+
+
+      </th>
+    </tr>
+{#  <tr>#}
+{#      <th>Category</th>#}
+{#      <td>#}
+{#          <input type="radio" name="radio" id="radio" value="stitched"{% if data.type == 'stitched' %}checked{% endif %}/>#}
+{#          <label for="radio">Stitched <br/></label>#}
+{##}
+{#      </label></br>#}
+{#        <input type="radio" name="radio" id="radio2" {% if data.type == 'unstitched' %}checked{% endif %} value="unstitched" /> <label for="radio">Unstitched <br/>#}
+{#      </label></br>#}
+{#      </td>>#}
+{#    </tr>#}
+    <tr>
+      <th>Photo 1</th>
+      <th>
+          <img src="{{ data.photo }}" height="50px" width="50px"/>
+      <input type="file" name="fileField" id="fileField" /></th>
+    </tr>
+
+    <tr>
+      <th>Price</th>
+      <td>
+      <input type="text" name="textfield3" id="textfield3" value="{{ data.price }}" class="form-control"/></td>
+    </tr>
+
+    <tr><th></th>
+      <th><input type="submit" name="button" id="button" value="EDIT" class="btn btn-success" /></th>
+    </tr>
+
+  </table>
+</form>
+{% endblock %}

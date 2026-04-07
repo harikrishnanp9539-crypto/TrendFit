@@ -1,0 +1,43 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_user_POST/#ab">
+ {% csrf_token %}
+  <table width="200" border="1">
+    <tr>
+      <th>
+      <input type="text" name="textfield" id="textfield"  class="form-control" required/></th>
+      <td><input type="submit" name="button" id="button" value="Search" class="btn btn-success" /></td>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>SL NO</th>
+      <th>Username</th>
+      <th>Photo</th>
+      <th>Address</th>
+      <th>phone</th>
+      <th>Email</th>
+      <th>Gender</th>
+        <th>Age</th>
+        <th>Height</th>
+
+      
+    </tr>
+      {%  for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}&nbsp;</td>
+      <td>{{ i.username }}&nbsp;</td>
+      <td><img src="{{ i.photo }}" height="100" width="100"></td>
+      <td>{{ i.place }},{{ i.post }}{{ i.pincode }},{{ i.district }}</td>
+      <td>&nbsp;{{ i.phone }}</td>
+      <td>{{ i.email}}&nbsp;</td>
+      <td>&nbsp;{{ i.gender}}</td>
+      <td>&nbsp;{{ i.age }}</td>
+      <td>{{ i.height }}</td>
+      </tr>
+           {% endfor %}
+  </table>
+  <p>&nbsp;</p>
+</form>
+{% endblock %}

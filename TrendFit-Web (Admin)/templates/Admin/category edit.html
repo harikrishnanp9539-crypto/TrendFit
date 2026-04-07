@@ -1,0 +1,26 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+    <form id="form1" name="form1" method="post" action="/myapp/Category_edit_post/">
+
+<table class="table table-bordered">
+        {% csrf_token %}
+
+          <input type="hidden" name="id" value="{{ data.id }}" id="textfield" class="form-control"/>
+
+
+  <tr>
+    <th>Category</th>
+    <td>
+
+      <input type="text" name="textfield" value="{{ data.categoryname }}" id="textfield" class="form-control"/>
+  </td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td><input type="submit" name="button" id="button" value="Edit" class="btn btn-success" /></td>
+  </tr>
+ </table>
+  </form>
+
+{% endblock %}

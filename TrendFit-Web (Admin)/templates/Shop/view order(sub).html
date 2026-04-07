@@ -1,0 +1,24 @@
+{% extends "admin/newindex.html"  %}
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_ordersub_post/">
+{% csrf_token %}
+
+  <table class="table table-bordered">
+    <tr>
+      <td>SLNO</td>
+      <td>Dress</td>
+      <td>Quantity</td>
+
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td><img src="{{ i.DRESS.photo }}" height="100" width="100"></td>
+{#      <td>{{ i.DRESS }}&nbsp;</td>#}
+      <td>&nbsp;{{ i.quantity }}</td>
+
+    </tr>
+      {% endfor%}
+  </table>
+</form>
+{% endblock %}

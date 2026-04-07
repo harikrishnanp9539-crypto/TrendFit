@@ -1,0 +1,34 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+
+<form id="form1" name="form1" method="post" action="/myapp/Category_view_POST/#ab">
+
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th>
+      <input type="text" name="textfield" id="textfield" class="form-control" required/></th>
+      <th><input name="button" type="submit" id="button" value="Search " class="btn btn-success"/></th>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>S NO</th>
+      <th>Category name</th>
+      <th>&nbsp;</th>
+      <th>&nbsp;</th>
+    </tr>
+      {% for i in data %}
+
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.categoryname }}</td>
+      <td><a href="/myapp/Category_edit/{{ i.id }}#ab" class="btn btn-info">Edit</a></td>
+      <td><a href="/myapp/Category_delete/{{ i.id }}#ab" class="btn btn-danger">Delete</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+
+{% endblock %}

@@ -1,0 +1,40 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+<form id="form1" name="form1" method="post" action="/myapp/view_tone_POST/#ab">
+
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <td>
+      <input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+      <td><input name="button" type="submit" id="button" value="Search" class="btn btn-success" /></td>
+    </tr>
+  </table>
+<table class="table table-bordered">
+
+  <tr>
+    <th>Sl no</th>
+    <th>Tone name</th>
+{#    <th>Tone Photo</th>#}
+    <td>&nbsp;</td>
+    <td>&nbsp;</td>
+  </tr>
+   {% for i in data %}
+
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.tonename }}</td>
+{#              <td><img src="{{ i.tonephoto }}" height="100" width="10"><a href="#">Download</a></td>#}
+
+      <td><a href="/myapp/edit_tone/{{ i.id }}#ab"class="btn btn-info">Edit</a></td>
+      <td><a href="/myapp/delete_tone/{{ i.id }}#ab"class="btn btn-danger" onclick="return confirm('Are u sure?')" >Delete</a></td>
+    </tr>
+      {% endfor %}
+  <tr>
+
+
+  </tr>
+</table>
+</form>
+{% endblock %}

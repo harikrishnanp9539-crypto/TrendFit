@@ -1,0 +1,57 @@
+{#{% extends "admin/newindex.html"  %}#}
+{##}
+{#{% block body %}#}
+{##}
+{#<form action="/myapp/Add_tone_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">#}
+{#    {% csrf_token %}#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Tone Name</th>#}
+{#      <td>#}
+{#      <input type="text" name="textfield" id="textfield" class="form-control" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>Tone Photo</td>#}
+{#      <td>#}
+{#      <input type="file" name="fileField" id="fileField" class="form-control" /></td>#}
+{#    </tr>#}
+{#    <tr>#}
+{#      <td>&nbsp;</td>#}
+{#      <td><input type="submit" name="button" id="button" value="Add" class="btn btn-success" /></td>#}
+{#    </tr>#}
+{#  </table>#}
+{#</form>#}
+{##}
+{# {% endblock %}#}
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+
+<script>
+function validateForm() {
+    var toneName = document.getElementById("textfield").value;
+
+    if (toneName.trim() === "") {
+        alert("Tone Name cannot be empty");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<form action="/myapp/Add_tone_post/" method="post" enctype="multipart/form-data" name="form1" id="form1" onsubmit="return validateForm()">
+    {% csrf_token %}
+  <table class="table table-bordered">
+    <tr>
+      <th>Tone Name</th>
+      <td>
+      <input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+    </tr>
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="Add" class="btn btn-success" /></td>
+    </tr>
+  </table>
+</form>
+
+{% endblock %}

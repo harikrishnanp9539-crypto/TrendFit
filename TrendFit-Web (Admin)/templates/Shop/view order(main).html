@@ -1,0 +1,94 @@
+{#{% extends 'Shop/shopindex.html' %}#}
+{#{% block body %}#}
+{#<form id="form1" name="form1" method="post" action="/myapp/view_order_main_post/#ab">#}
+{#{% csrf_token %}#}
+{#  <table class="pull-left">#}
+{#    <tr>#}
+{#      <th>From</th>#}
+{#      <td><label for="textfield"></label>#}
+{#      <input type="date" name="textfield" id="textfield" class="form-control"/></td>#}
+{#      <th>To</th>#}
+{#      <th><label for="textfield2"></label>#}
+{#      <input type="date" name="textfield2" id="textfield2" class="form-control" /></th>#}
+{#      <th><input type="submit" name="button" id="button" value="Search"  class="btn btn-success"/></th>#}
+{#    </tr>#}
+{#  </table>#}
+{#  <p>&nbsp;</p>#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Sl no</th>#}
+{#      <th>Date</th>#}
+{#      <th>UserInfo</th>#}
+{#      <th>Amount</th>#}
+{#      <th></th>#}
+{#        <th></th>#}
+{#        <th></th>#}
+{#    </tr>#}
+{#      {% for i in data %}#}
+{#    <tr>#}
+{#      <td>{{ forloop.counter }}</td>#}
+{#      <td>{{ i.date }}&nbsp;</td>#}
+{#      <td>{{ i.USER.username }}&nbsp; <br> {{ i.USER.place }} <br> {{i.USER.post }} <br> {{ i.USER.pincode }} <br> {{ i.USER.state }} <br> {{ i.USER.phone }} <br> {{ i.USER.email }}</td>#}
+{#      <td>{{ i.amount }}</td>#}
+{#      <td>{{ i.status }}</td>#}
+{#      <td><a href="/myapp/view_ordersub/{{ i.id }}#ab">more</a></td>#}
+{#      <td><a href="/myapp/place_order_to_deliveryboy/{{ i.id }}#ab">Assign delivery  boy</a></td>#}
+{#    </tr>#}
+{#      {% endfor %}#}
+{#  </table>#}
+{#</form>#}
+{#{% endblock %}#}
+
+
+
+{% extends "admin/newindex.html"  %}
+{% block body %}
+<script>
+function validateForm() {
+    var fromDate = document.getElementById("textfield").value.trim();
+    var toDate = document.getElementById("textfield2").value.trim();
+    if (fromDate === "" || toDate === "") {
+        alert("Please select both From and To dates.");
+        return false;
+    }
+    if (new Date(fromDate) > new Date(toDate)) {
+        alert("From date cannot be later than To date.");
+        return false;
+    }
+    return true;
+}
+</script>
+
+<form id="form1" name="form1" method="post" action="/myapp/view_order_main_post/#ab" onsubmit="return validateForm()">
+{% csrf_token %}
+  <table class="pull-left">
+    <tr>
+      <th>From</th>
+      <td>
+      <input type="date" name="textfield" id="textfield" class="form-control" required/></td>
+      <th>To</th>
+      <th>
+      <input type="date" name="textfield2" id="textfield2" class="form-control" required/></th>
+      <th><input type="submit" name="button" id="button" value="Search"  class="btn btn-success" /></th>
+    </tr>
+  </table>
+  <table class="table table-bordered">
+    <tr>
+      <th>Sl no</th>
+      <th>Date</th>
+      <th>UserInfo</th>
+      <th>Amount</th>
+      <th>Details</th>
+    </tr>
+      {% for i in data %}
+    <tr>
+      <td>{{ forloop.counter }}</td>
+      <td>{{ i.date }}&nbsp;</td>
+      <td>{{ i.USER.username }}&nbsp; <br> {{ i.USER.place }} <br> {{i.USER.post }} <br> {{ i.USER.pincode }} <br> {{ i.USER.state }} <br> {{ i.USER.phone }} <br> {{ i.USER.email }}</td>
+      <td>{{ i.amount }}</td>
+      <td><a href="/myapp/view_ordersub/{{ i.id }}#aa">more</a></td>
+    </tr>
+      {% endfor %}
+  </table>
+</form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends "admin/newindex.html"  %}
+
+{% block body %}
+
+<form action="/myapp/edit_tone_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">
+    {% csrf_token %}
+  <table class="table table-bordered">
+    <tr>
+      <th>Tone Name</th><input type="hidden" name="id" value="{{ data.id }}" class="form-control">
+      <td>
+      <input type="text" name="textfield" value="{{ data.tonename }}" id="textfield" class="form-control"/></td>
+    </tr>
+    <!-- <tr>
+      <td>Tone Photo</td>
+      <td><img src="{{ data.tonephoto }}" height="200" width="200" alt="" />
+      <input type="file" name="fileField" id="fileField" class="form-control" /></td>
+    </tr> -->
+    <tr>
+      <td>&nbsp;</td>
+      <td><input type="submit" name="button" id="button" value="Edit" class="btn btn-success"/></td>
+    </tr>
+  </table>
+</form>
+{% endblock %}

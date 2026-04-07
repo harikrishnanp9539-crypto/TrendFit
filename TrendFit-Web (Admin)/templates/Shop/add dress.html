@@ -1,0 +1,132 @@
+{#{% extends 'Shop/shopindex.html' %}#}
+{#{% block body %}#}
+{#<form action="/myapp/add_dress_post/" method="post" enctype="multipart/form-data" name="form1" id="form1">#}
+{#    {% csrf_token %}#}
+{#  <table class="table table-bordered">#}
+{#    <tr>#}
+{#      <th>Dress name</th>#}
+{#        <td><input type="text" name="textfield" id="textfield" class="form-control"/></td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <th>Size</th>#}
+{#      <td><input type="text" name="textfield2" id="textfield2" class="form-control"/></td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <th>Type</th>#}
+{#      <th><input type="radio" name="radio" id="radio" value="stitched" />#}
+{#          <label for="radio">Stitched </label><br>#}
+{#        <input type="radio" name="radio" id="radio2" value="unstitched"/>#}
+{#          <label for="radio">Unstitched </label><br></th>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <th>Photo 1</th>#}
+{#      <td><input type="file" name="fileField" id="fileField" /></td>#}
+{#    </tr>#}
+{#   #}
+{#    <tr>#}
+{#      <th>Price</th>#}
+{#      <td><input type="text" name="textfield3" id="textfield3"class="form-control" /></td>#}
+{#    </tr>   <tr>#}
+{#      <th>Tone</th>#}
+{#      <td>#}
+{##}
+{#          <select name="tone">#}
+{#            {% for i in data %}#}
+{#              <option value="{{ i.id }}">{{ i.tonename}}</option>#}
+{#              {% endfor %}#}
+{##}
+{#          </select>#}
+{##}
+{##}
+{#      </td>#}
+{#    </tr>#}
+{##}
+{#    <tr>#}
+{#      <td>&nbsp;</td>#}
+{#      <th><input type="submit" name="button" id="button" value="Submit"  class="btn btn-success" /></th>#}
+{#    </tr>#}
+{##}
+{#  </table>#}
+{#</form>#}
+{#{% endblock %}#}
+{% extends "admin/newindex.html"  %}
+{% block body %}
+<script>
+function validateForm() {
+    var dressName = document.getElementById("textfield").value.trim();
+    var size = document.getElementById("textfield2").value.trim();
+    var price = document.getElementById("textfield3").value.trim();
+    var photo = document.getElementById("fileField").value;
+    var type = document.querySelector('input[name="radio"]:checked');
+    return true;
+}
+</script>
+
+<form action="/myapp/add_dress_post/" method="post" enctype="multipart/form-data" name="form1" id="form1" onsubmit="return validateForm()">
+    {% csrf_token %}
+  <table class="table table-bordered">
+    <tr>
+      <th>Dress name</th>
+        <td><input type="text" name="textfield" id="textfield" class="form-control" required/></td>
+    </tr>
+
+    <tr>
+      <th>Size</th>
+      <td><input type="text" name="textfield2" id="textfield2" class="form-control" required/></td>
+    </tr>
+
+
+   <tr>
+      <th>gender</th>
+      <th><input type="radio" name="gender" id="radio" value="male" required/>
+          <label for="radio">Male </label><br>
+        <input type="radio" name="gender" id="radio" value="female"/>
+          <label for="radio">Female </label><br></th>
+    </tr>
+
+
+    <tr>
+      <th>Category</th>
+      <th>
+
+          <select name="category" required>
+              {% for i in data1 %}
+              <option value="{{ i.categoryname }}">{{ i.categoryname}}</option>
+              {% endfor %}
+
+          </select>
+
+
+      </th>
+    </tr>
+
+    <tr>
+      <th>Photo 1</th>
+      <td><input type="file" name="fileField" id="fileField" required/></td>
+    </tr>
+
+    <tr>
+      <th>Price</th>
+      <td><input type="text" name="textfield3" id="textfield3"class="form-control" required/></td>
+    </tr>   <tr>
+      <th>Tone</th>
+      <td>
+          <select name="tone" required>
+            {% for i in data %}
+              <option value="{{ i.id }}">{{ i.tonename}}</option>
+              {% endfor %}
+          </select>
+      </td>
+    </tr>
+
+    <tr>
+      <td>&nbsp;</td>
+      <th><input type="submit" name="button" id="button" value="Submit"  class="btn btn-success" /></th>
+    </tr>
+
+  </table>
+</form>
+{% endblock %}
